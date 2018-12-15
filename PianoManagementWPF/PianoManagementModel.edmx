@@ -1,0 +1,520 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PianoManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accord">
+          <Key>
+            <PropertyRef Name="AccordId" />
+          </Key>
+          <Property Name="AccordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccordDate" Type="datetime" Nullable="false" />
+          <Property Name="AccordRemarque" Type="text" Nullable="false" />
+          <Property Name="PianoId" Type="int" Nullable="false" />
+          <Property Name="AccordeurId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Accordeur">
+          <Key>
+            <PropertyRef Name="AccordeurId" />
+          </Key>
+          <Property Name="AccordeurId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccordeurNom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccordeurPrenom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EntrepriseId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entreprise">
+          <Key>
+            <PropertyRef Name="EntrepriseId" />
+          </Key>
+          <Property Name="EntrepriseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntrepriseLibelle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EntrepriseAdresse" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EntrepriseTel" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Piano">
+          <Key>
+            <PropertyRef Name="PianoId" />
+          </Key>
+          <Property Name="PianoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PianoMarque" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PianoModele" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PianoNumero" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SalleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Professeur">
+          <Key>
+            <PropertyRef Name="ProfesseurId" />
+          </Key>
+          <Property Name="ProfesseurId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProfesseurNom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProfesseurPrenom" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Salle">
+          <Key>
+            <PropertyRef Name="SalleId" />
+          </Key>
+          <Property Name="SalleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SalleLibelle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SiteId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="SiteId" />
+          </Key>
+          <Property Name="SiteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SiteLibelle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SiteAdresse" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Utiliser">
+          <Key>
+            <PropertyRef Name="PianoId" />
+            <PropertyRef Name="ProfesseurId" />
+          </Key>
+          <Property Name="PianoId" Type="int" Nullable="false" />
+          <Property Name="ProfesseurId" Type="int" Nullable="false" />
+          <Property Name="UtiliserRemarque" Type="text" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Accord_Accordeur0">
+          <End Role="Accordeur" Type="Self.Accordeur" Multiplicity="1" />
+          <End Role="Accord" Type="Self.Accord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accordeur">
+              <PropertyRef Name="AccordeurId" />
+            </Principal>
+            <Dependent Role="Accord">
+              <PropertyRef Name="AccordeurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accord_Piano">
+          <End Role="Piano" Type="Self.Piano" Multiplicity="1" />
+          <End Role="Accord" Type="Self.Accord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piano">
+              <PropertyRef Name="PianoId" />
+            </Principal>
+            <Dependent Role="Accord">
+              <PropertyRef Name="PianoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accordeur_Entreprise">
+          <End Role="Entreprise" Type="Self.Entreprise" Multiplicity="1" />
+          <End Role="Accordeur" Type="Self.Accordeur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entreprise">
+              <PropertyRef Name="EntrepriseId" />
+            </Principal>
+            <Dependent Role="Accordeur">
+              <PropertyRef Name="EntrepriseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Piano_Salle">
+          <End Role="Salle" Type="Self.Salle" Multiplicity="1" />
+          <End Role="Piano" Type="Self.Piano" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salle">
+              <PropertyRef Name="SalleId" />
+            </Principal>
+            <Dependent Role="Piano">
+              <PropertyRef Name="SalleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salle_Site">
+          <End Role="Site" Type="Self.Site" Multiplicity="1" />
+          <End Role="Salle" Type="Self.Salle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Site">
+              <PropertyRef Name="SiteId" />
+            </Principal>
+            <Dependent Role="Salle">
+              <PropertyRef Name="SiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utiliser_Piano">
+          <End Role="Piano" Type="Self.Piano" Multiplicity="1" />
+          <End Role="Utiliser" Type="Self.Utiliser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piano">
+              <PropertyRef Name="PianoId" />
+            </Principal>
+            <Dependent Role="Utiliser">
+              <PropertyRef Name="PianoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utiliser_Professeur0">
+          <End Role="Professeur" Type="Self.Professeur" Multiplicity="1" />
+          <End Role="Utiliser" Type="Self.Utiliser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professeur">
+              <PropertyRef Name="ProfesseurId" />
+            </Principal>
+            <Dependent Role="Utiliser">
+              <PropertyRef Name="ProfesseurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PianoManagementModelStoreContainer">
+          <EntitySet Name="Accord" EntityType="Self.Accord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Accordeur" EntityType="Self.Accordeur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entreprise" EntityType="Self.Entreprise" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Piano" EntityType="Self.Piano" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Professeur" EntityType="Self.Professeur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salle" EntityType="Self.Salle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Site" EntityType="Self.Site" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utiliser" EntityType="Self.Utiliser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Accord_Accordeur0" Association="Self.FK_Accord_Accordeur0">
+            <End Role="Accordeur" EntitySet="Accordeur" />
+            <End Role="Accord" EntitySet="Accord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accord_Piano" Association="Self.FK_Accord_Piano">
+            <End Role="Piano" EntitySet="Piano" />
+            <End Role="Accord" EntitySet="Accord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accordeur_Entreprise" Association="Self.FK_Accordeur_Entreprise">
+            <End Role="Entreprise" EntitySet="Entreprise" />
+            <End Role="Accordeur" EntitySet="Accordeur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Piano_Salle" Association="Self.FK_Piano_Salle">
+            <End Role="Salle" EntitySet="Salle" />
+            <End Role="Piano" EntitySet="Piano" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salle_Site" Association="Self.FK_Salle_Site">
+            <End Role="Site" EntitySet="Site" />
+            <End Role="Salle" EntitySet="Salle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utiliser_Piano" Association="Self.FK_Utiliser_Piano">
+            <End Role="Piano" EntitySet="Piano" />
+            <End Role="Utiliser" EntitySet="Utiliser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utiliser_Professeur0" Association="Self.FK_Utiliser_Professeur0">
+            <End Role="Professeur" EntitySet="Professeur" />
+            <End Role="Utiliser" EntitySet="Utiliser" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PianoManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Accord">
+          <Key>
+            <PropertyRef Name="AccordId" />
+          </Key>
+          <Property Name="AccordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccordDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AccordRemarque" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PianoId" Type="Int32" Nullable="false" />
+          <Property Name="AccordeurId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accordeur" Relationship="Self.FK_Accord_Accordeur0" FromRole="Accord" ToRole="Accordeur" />
+          <NavigationProperty Name="Piano" Relationship="Self.FK_Accord_Piano" FromRole="Accord" ToRole="Piano" />
+        </EntityType>
+        <EntityType Name="Accordeur">
+          <Key>
+            <PropertyRef Name="AccordeurId" />
+          </Key>
+          <Property Name="AccordeurId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccordeurNom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AccordeurPrenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EntrepriseId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accord" Relationship="Self.FK_Accord_Accordeur0" FromRole="Accordeur" ToRole="Accord" />
+          <NavigationProperty Name="Entreprise" Relationship="Self.FK_Accordeur_Entreprise" FromRole="Accordeur" ToRole="Entreprise" />
+        </EntityType>
+        <EntityType Name="Entreprise">
+          <Key>
+            <PropertyRef Name="EntrepriseId" />
+          </Key>
+          <Property Name="EntrepriseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntrepriseLibelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EntrepriseAdresse" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EntrepriseTel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Accordeur" Relationship="Self.FK_Accordeur_Entreprise" FromRole="Entreprise" ToRole="Accordeur" />
+        </EntityType>
+        <EntityType Name="Piano">
+          <Key>
+            <PropertyRef Name="PianoId" />
+          </Key>
+          <Property Name="PianoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PianoMarque" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PianoModele" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PianoNumero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SalleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accord" Relationship="Self.FK_Accord_Piano" FromRole="Piano" ToRole="Accord" />
+          <NavigationProperty Name="Salle" Relationship="Self.FK_Piano_Salle" FromRole="Piano" ToRole="Salle" />
+          <NavigationProperty Name="Utiliser" Relationship="Self.FK_Utiliser_Piano" FromRole="Piano" ToRole="Utiliser" />
+        </EntityType>
+        <EntityType Name="Professeur">
+          <Key>
+            <PropertyRef Name="ProfesseurId" />
+          </Key>
+          <Property Name="ProfesseurId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProfesseurNom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProfesseurPrenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Utiliser" Relationship="Self.FK_Utiliser_Professeur0" FromRole="Professeur" ToRole="Utiliser" />
+        </EntityType>
+        <EntityType Name="Salle">
+          <Key>
+            <PropertyRef Name="SalleId" />
+          </Key>
+          <Property Name="SalleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SalleLibelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SiteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Piano" Relationship="Self.FK_Piano_Salle" FromRole="Salle" ToRole="Piano" />
+          <NavigationProperty Name="Site" Relationship="Self.FK_Salle_Site" FromRole="Salle" ToRole="Site" />
+        </EntityType>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="SiteId" />
+          </Key>
+          <Property Name="SiteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SiteLibelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SiteAdresse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Salle" Relationship="Self.FK_Salle_Site" FromRole="Site" ToRole="Salle" />
+        </EntityType>
+        <EntityType Name="Utiliser">
+          <Key>
+            <PropertyRef Name="PianoId" />
+            <PropertyRef Name="ProfesseurId" />
+          </Key>
+          <Property Name="PianoId" Type="Int32" Nullable="false" />
+          <Property Name="ProfesseurId" Type="Int32" Nullable="false" />
+          <Property Name="UtiliserRemarque" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Piano" Relationship="Self.FK_Utiliser_Piano" FromRole="Utiliser" ToRole="Piano" />
+          <NavigationProperty Name="Professeur" Relationship="Self.FK_Utiliser_Professeur0" FromRole="Utiliser" ToRole="Professeur" />
+        </EntityType>
+        <Association Name="FK_Accord_Accordeur0">
+          <End Role="Accordeur" Type="Self.Accordeur" Multiplicity="1" />
+          <End Role="Accord" Type="Self.Accord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accordeur">
+              <PropertyRef Name="AccordeurId" />
+            </Principal>
+            <Dependent Role="Accord">
+              <PropertyRef Name="AccordeurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accord_Piano">
+          <End Role="Piano" Type="Self.Piano" Multiplicity="1" />
+          <End Role="Accord" Type="Self.Accord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piano">
+              <PropertyRef Name="PianoId" />
+            </Principal>
+            <Dependent Role="Accord">
+              <PropertyRef Name="PianoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accordeur_Entreprise">
+          <End Role="Entreprise" Type="Self.Entreprise" Multiplicity="1" />
+          <End Role="Accordeur" Type="Self.Accordeur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entreprise">
+              <PropertyRef Name="EntrepriseId" />
+            </Principal>
+            <Dependent Role="Accordeur">
+              <PropertyRef Name="EntrepriseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Piano_Salle">
+          <End Role="Salle" Type="Self.Salle" Multiplicity="1" />
+          <End Role="Piano" Type="Self.Piano" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salle">
+              <PropertyRef Name="SalleId" />
+            </Principal>
+            <Dependent Role="Piano">
+              <PropertyRef Name="SalleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utiliser_Piano">
+          <End Role="Piano" Type="Self.Piano" Multiplicity="1" />
+          <End Role="Utiliser" Type="Self.Utiliser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piano">
+              <PropertyRef Name="PianoId" />
+            </Principal>
+            <Dependent Role="Utiliser">
+              <PropertyRef Name="PianoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utiliser_Professeur0">
+          <End Role="Professeur" Type="Self.Professeur" Multiplicity="1" />
+          <End Role="Utiliser" Type="Self.Utiliser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professeur">
+              <PropertyRef Name="ProfesseurId" />
+            </Principal>
+            <Dependent Role="Utiliser">
+              <PropertyRef Name="ProfesseurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salle_Site">
+          <End Role="Site" Type="Self.Site" Multiplicity="1" />
+          <End Role="Salle" Type="Self.Salle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Site">
+              <PropertyRef Name="SiteId" />
+            </Principal>
+            <Dependent Role="Salle">
+              <PropertyRef Name="SiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PianoManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accord" EntityType="Self.Accord" />
+          <EntitySet Name="Accordeur" EntityType="Self.Accordeur" />
+          <EntitySet Name="Entreprise" EntityType="Self.Entreprise" />
+          <EntitySet Name="Piano" EntityType="Self.Piano" />
+          <EntitySet Name="Professeur" EntityType="Self.Professeur" />
+          <EntitySet Name="Salle" EntityType="Self.Salle" />
+          <EntitySet Name="Site" EntityType="Self.Site" />
+          <EntitySet Name="Utiliser" EntityType="Self.Utiliser" />
+          <AssociationSet Name="FK_Accord_Accordeur0" Association="Self.FK_Accord_Accordeur0">
+            <End Role="Accordeur" EntitySet="Accordeur" />
+            <End Role="Accord" EntitySet="Accord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accord_Piano" Association="Self.FK_Accord_Piano">
+            <End Role="Piano" EntitySet="Piano" />
+            <End Role="Accord" EntitySet="Accord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accordeur_Entreprise" Association="Self.FK_Accordeur_Entreprise">
+            <End Role="Entreprise" EntitySet="Entreprise" />
+            <End Role="Accordeur" EntitySet="Accordeur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Piano_Salle" Association="Self.FK_Piano_Salle">
+            <End Role="Salle" EntitySet="Salle" />
+            <End Role="Piano" EntitySet="Piano" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utiliser_Piano" Association="Self.FK_Utiliser_Piano">
+            <End Role="Piano" EntitySet="Piano" />
+            <End Role="Utiliser" EntitySet="Utiliser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utiliser_Professeur0" Association="Self.FK_Utiliser_Professeur0">
+            <End Role="Professeur" EntitySet="Professeur" />
+            <End Role="Utiliser" EntitySet="Utiliser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salle_Site" Association="Self.FK_Salle_Site">
+            <End Role="Site" EntitySet="Site" />
+            <End Role="Salle" EntitySet="Salle" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PianoManagementModelStoreContainer" CdmEntityContainer="PianoManagementEntities">
+          <EntitySetMapping Name="Accord">
+            <EntityTypeMapping TypeName="PianoManagementModel.Accord">
+              <MappingFragment StoreEntitySet="Accord">
+                <ScalarProperty Name="AccordId" ColumnName="AccordId" />
+                <ScalarProperty Name="AccordDate" ColumnName="AccordDate" />
+                <ScalarProperty Name="AccordRemarque" ColumnName="AccordRemarque" />
+                <ScalarProperty Name="PianoId" ColumnName="PianoId" />
+                <ScalarProperty Name="AccordeurId" ColumnName="AccordeurId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accordeur">
+            <EntityTypeMapping TypeName="PianoManagementModel.Accordeur">
+              <MappingFragment StoreEntitySet="Accordeur">
+                <ScalarProperty Name="AccordeurId" ColumnName="AccordeurId" />
+                <ScalarProperty Name="AccordeurNom" ColumnName="AccordeurNom" />
+                <ScalarProperty Name="AccordeurPrenom" ColumnName="AccordeurPrenom" />
+                <ScalarProperty Name="EntrepriseId" ColumnName="EntrepriseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entreprise">
+            <EntityTypeMapping TypeName="PianoManagementModel.Entreprise">
+              <MappingFragment StoreEntitySet="Entreprise">
+                <ScalarProperty Name="EntrepriseId" ColumnName="EntrepriseId" />
+                <ScalarProperty Name="EntrepriseLibelle" ColumnName="EntrepriseLibelle" />
+                <ScalarProperty Name="EntrepriseAdresse" ColumnName="EntrepriseAdresse" />
+                <ScalarProperty Name="EntrepriseTel" ColumnName="EntrepriseTel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Piano">
+            <EntityTypeMapping TypeName="PianoManagementModel.Piano">
+              <MappingFragment StoreEntitySet="Piano">
+                <ScalarProperty Name="PianoId" ColumnName="PianoId" />
+                <ScalarProperty Name="PianoMarque" ColumnName="PianoMarque" />
+                <ScalarProperty Name="PianoModele" ColumnName="PianoModele" />
+                <ScalarProperty Name="PianoNumero" ColumnName="PianoNumero" />
+                <ScalarProperty Name="SalleId" ColumnName="SalleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Professeur">
+            <EntityTypeMapping TypeName="PianoManagementModel.Professeur">
+              <MappingFragment StoreEntitySet="Professeur">
+                <ScalarProperty Name="ProfesseurId" ColumnName="ProfesseurId" />
+                <ScalarProperty Name="ProfesseurNom" ColumnName="ProfesseurNom" />
+                <ScalarProperty Name="ProfesseurPrenom" ColumnName="ProfesseurPrenom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salle">
+            <EntityTypeMapping TypeName="PianoManagementModel.Salle">
+              <MappingFragment StoreEntitySet="Salle">
+                <ScalarProperty Name="SalleId" ColumnName="SalleId" />
+                <ScalarProperty Name="SalleLibelle" ColumnName="SalleLibelle" />
+                <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Site">
+            <EntityTypeMapping TypeName="PianoManagementModel.Site">
+              <MappingFragment StoreEntitySet="Site">
+                <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+                <ScalarProperty Name="SiteLibelle" ColumnName="SiteLibelle" />
+                <ScalarProperty Name="SiteAdresse" ColumnName="SiteAdresse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utiliser">
+            <EntityTypeMapping TypeName="PianoManagementModel.Utiliser">
+              <MappingFragment StoreEntitySet="Utiliser">
+                <ScalarProperty Name="PianoId" ColumnName="PianoId" />
+                <ScalarProperty Name="ProfesseurId" ColumnName="ProfesseurId" />
+                <ScalarProperty Name="UtiliserRemarque" ColumnName="UtiliserRemarque" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

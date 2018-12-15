@@ -24,5 +24,30 @@ namespace PianoManagementWPF
         {
             InitializeComponent();
         }
+
+        private void BoutonGestionPiano_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BoutonGestionAccord_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BoutonParametresProfesseur_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BoutonParametresEntreprise_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BoutonParametresSite_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

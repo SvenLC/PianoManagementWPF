@@ -35,8 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +64,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Accord.cs">
+      <DependentUpon>PianoManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Accordeur.cs">
+      <DependentUpon>PianoManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entreprise.cs">
+      <DependentUpon>PianoManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Piano.cs">
+      <DependentUpon>PianoManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PianoManagementModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PianoManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Professeur.cs">
+      <DependentUpon>PianoManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Salle.cs">
+      <DependentUpon>PianoManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Site.cs">
+      <DependentUpon>PianoManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utiliser.cs">
+      <DependentUpon>PianoManagementModel.tt</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -69,6 +107,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PianoManagementModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PianoManagementModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PianoManagementModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PianoManagementModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -86,6 +134,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
+    <EntityDeploy Include="PianoManagementModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PianoManagementModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="PianoManagementModel.edmx.diagram">
+      <DependentUpon>PianoManagementModel.edmx</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,6 +149,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PianoManagementModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PianoManagementModel.Context.cs</LastGenOutput>
+      <DependentUpon>PianoManagementModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="PianoManagementModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PianoManagementModel.edmx</DependentUpon>
+      <LastGenOutput>PianoManagementModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

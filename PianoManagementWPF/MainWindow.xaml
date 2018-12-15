@@ -7,6 +7,38 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.Children>
+            <Menu Grid.Column="0" Grid.Row="0">
+                <MenuItem Header="Fichier">
+                    <MenuItem Header="Ajouter" x:Name="BoutonAjouter" Click="BoutonAjouter_Click"></MenuItem>
+                    <MenuItem Header="Modifier" x:Name="BoutonModifier" Click="BoutonModifier_Click"></MenuItem>
+                    <MenuItem Header="Supprimer" x:Name="BoutonSupprimer" Click="BoutonSupprimer_Click"></MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Quitter" x:Name="BoutonQuitter" Click="BoutonQuitter_Click"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Gestion">
+                    <MenuItem Header="Piano" x:Name="BoutonGestionPiano" Click="BoutonGestionPiano_Click"></MenuItem>
+                    <MenuItem Header="Accord" x:Name="BoutonGestionAccord" Click="BoutonGestionAccord_Click"></MenuItem>                    
+                </MenuItem>
+                <MenuItem Header="Paramètres">
+                    <MenuItem Header="Professeur" x:Name="BoutonParametresProfesseur" Click="BoutonParametresProfesseur_Click"></MenuItem>
+                    <MenuItem Header="Entreprise" x:Name="BoutonParametreEntreprise" Click="BoutonParametresEntreprise_Click"></MenuItem>
+                    <MenuItem Header="Site" x:Name="BoutonParametresSite" Click="BoutonParametresSite_Click"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="?">
+                    <MenuItem Header="A propos"></MenuItem>
+                </MenuItem>
+            </Menu>
+            <Grid Grid.Column="0" Grid.Row="1" x:Name="GridContenu">
+
+            </Grid>
+        </Grid.Children>
     </Grid>
 </Window>
