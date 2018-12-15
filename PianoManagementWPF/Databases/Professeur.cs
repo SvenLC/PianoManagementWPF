@@ -7,18 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PianoManagementWPF
+namespace PianoManagementWPF.Databases
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Utiliser
+    public partial class Professeur
     {
-        public int PianoId { get; set; }
-        public int ProfesseurId { get; set; }
-        public string UtiliserRemarque { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Professeur()
+        {
+            this.Utiliser = new HashSet<Utiliser>();
+        }
     
-        public virtual Piano Piano { get; set; }
-        public virtual Professeur Professeur { get; set; }
+        public int ProfesseurId { get; set; }
+        public string ProfesseurNom { get; set; }
+        public string ProfesseurPrenom { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Utiliser> Utiliser { get; set; }
     }
 }

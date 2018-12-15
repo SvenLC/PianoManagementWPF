@@ -7,30 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PianoManagementWPF
+namespace PianoManagementWPF.Databases
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Piano
+    public partial class Entreprise
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Piano()
+        public Entreprise()
         {
-            this.Accord = new HashSet<Accord>();
-            this.Utiliser = new HashSet<Utiliser>();
+            this.Accordeur = new HashSet<Accordeur>();
         }
     
-        public int PianoId { get; set; }
-        public string PianoMarque { get; set; }
-        public string PianoModele { get; set; }
-        public string PianoNumero { get; set; }
-        public int SalleId { get; set; }
+        public int EntrepriseId { get; set; }
+        public string EntrepriseLibelle { get; set; }
+        public string EntrepriseAdresse { get; set; }
+        public string EntrepriseTel { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Accord> Accord { get; set; }
-        public virtual Salle Salle { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Utiliser> Utiliser { get; set; }
+        public virtual ICollection<Accordeur> Accordeur { get; set; }
     }
 }

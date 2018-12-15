@@ -42,6 +42,14 @@
           <Property Name="PianoModele" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PianoNumero" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="SalleId" Type="int" Nullable="false" />
+          <Property Name="PianoTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PianoType">
+          <Key>
+            <PropertyRef Name="PianoTypeID" />
+          </Key>
+          <Property Name="PianoTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PianoTypeLibelle" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Professeur">
           <Key>
@@ -112,6 +120,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Piano_PianoType0">
+          <End Role="PianoType" Type="Self.PianoType" Multiplicity="1" />
+          <End Role="Piano" Type="Self.Piano" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PianoType">
+              <PropertyRef Name="PianoTypeID" />
+            </Principal>
+            <Dependent Role="Piano">
+              <PropertyRef Name="PianoTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Piano_Salle">
           <End Role="Salle" Type="Self.Salle" Multiplicity="1" />
           <End Role="Piano" Type="Self.Piano" Multiplicity="*" />
@@ -165,6 +185,7 @@
           <EntitySet Name="Accordeur" EntityType="Self.Accordeur" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Entreprise" EntityType="Self.Entreprise" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Piano" EntityType="Self.Piano" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PianoType" EntityType="Self.PianoType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Professeur" EntityType="Self.Professeur" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Salle" EntityType="Self.Salle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Site" EntityType="Self.Site" Schema="dbo" store:Type="Tables" />
@@ -180,6 +201,10 @@
           <AssociationSet Name="FK_Accordeur_Entreprise" Association="Self.FK_Accordeur_Entreprise">
             <End Role="Entreprise" EntitySet="Entreprise" />
             <End Role="Accordeur" EntitySet="Accordeur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Piano_PianoType0" Association="Self.FK_Piano_PianoType0">
+            <End Role="PianoType" EntitySet="PianoType" />
+            <End Role="Piano" EntitySet="Piano" />
           </AssociationSet>
           <AssociationSet Name="FK_Piano_Salle" Association="Self.FK_Piano_Salle">
             <End Role="Salle" EntitySet="Salle" />
@@ -245,9 +270,19 @@
           <Property Name="PianoModele" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PianoNumero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SalleId" Type="Int32" Nullable="false" />
+          <Property Name="PianoTypeID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Accord" Relationship="Self.FK_Accord_Piano" FromRole="Piano" ToRole="Accord" />
+          <NavigationProperty Name="PianoType" Relationship="Self.FK_Piano_PianoType0" FromRole="Piano" ToRole="PianoType" />
           <NavigationProperty Name="Salle" Relationship="Self.FK_Piano_Salle" FromRole="Piano" ToRole="Salle" />
           <NavigationProperty Name="Utiliser" Relationship="Self.FK_Utiliser_Piano" FromRole="Piano" ToRole="Utiliser" />
+        </EntityType>
+        <EntityType Name="PianoType">
+          <Key>
+            <PropertyRef Name="PianoTypeID" />
+          </Key>
+          <Property Name="PianoTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PianoTypeLibelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Piano" Relationship="Self.FK_Piano_PianoType0" FromRole="PianoType" ToRole="Piano" />
         </EntityType>
         <EntityType Name="Professeur">
           <Key>
@@ -324,6 +359,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Piano_PianoType0">
+          <End Role="PianoType" Type="Self.PianoType" Multiplicity="1" />
+          <End Role="Piano" Type="Self.Piano" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PianoType">
+              <PropertyRef Name="PianoTypeID" />
+            </Principal>
+            <Dependent Role="Piano">
+              <PropertyRef Name="PianoTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Piano_Salle">
           <End Role="Salle" Type="Self.Salle" Multiplicity="1" />
           <End Role="Piano" Type="Self.Piano" Multiplicity="*" />
@@ -372,11 +419,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PianoManagementEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PianoManagementEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accord" EntityType="Self.Accord" />
           <EntitySet Name="Accordeur" EntityType="Self.Accordeur" />
           <EntitySet Name="Entreprise" EntityType="Self.Entreprise" />
           <EntitySet Name="Piano" EntityType="Self.Piano" />
+          <EntitySet Name="PianoType" EntityType="Self.PianoType" />
           <EntitySet Name="Professeur" EntityType="Self.Professeur" />
           <EntitySet Name="Salle" EntityType="Self.Salle" />
           <EntitySet Name="Site" EntityType="Self.Site" />
@@ -392,6 +440,10 @@
           <AssociationSet Name="FK_Accordeur_Entreprise" Association="Self.FK_Accordeur_Entreprise">
             <End Role="Entreprise" EntitySet="Entreprise" />
             <End Role="Accordeur" EntitySet="Accordeur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Piano_PianoType0" Association="Self.FK_Piano_PianoType0">
+            <End Role="PianoType" EntitySet="PianoType" />
+            <End Role="Piano" EntitySet="Piano" />
           </AssociationSet>
           <AssociationSet Name="FK_Piano_Salle" Association="Self.FK_Piano_Salle">
             <End Role="Salle" EntitySet="Salle" />
@@ -415,7 +467,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PianoManagementModelStoreContainer" CdmEntityContainer="PianoManagementEntities">
+        <EntityContainerMapping StorageEntityContainer="PianoManagementModelStoreContainer" CdmEntityContainer="PianoManagementEntities1">
           <EntitySetMapping Name="Accord">
             <EntityTypeMapping TypeName="PianoManagementModel.Accord">
               <MappingFragment StoreEntitySet="Accord">
@@ -455,6 +507,15 @@
                 <ScalarProperty Name="PianoModele" ColumnName="PianoModele" />
                 <ScalarProperty Name="PianoNumero" ColumnName="PianoNumero" />
                 <ScalarProperty Name="SalleId" ColumnName="SalleId" />
+                <ScalarProperty Name="PianoTypeID" ColumnName="PianoTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PianoType">
+            <EntityTypeMapping TypeName="PianoManagementModel.PianoType">
+              <MappingFragment StoreEntitySet="PianoType">
+                <ScalarProperty Name="PianoTypeID" ColumnName="PianoTypeID" />
+                <ScalarProperty Name="PianoTypeLibelle" ColumnName="PianoTypeLibelle" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

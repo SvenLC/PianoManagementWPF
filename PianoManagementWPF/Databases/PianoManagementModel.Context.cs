@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PianoManagementWPF
+namespace PianoManagementWPF.Databases
 {
     using System;
     using System.Data.Entity;
@@ -29,6 +29,7 @@ namespace PianoManagementWPF
         public virtual DbSet<Accordeur> Accordeur { get; set; }
         public virtual DbSet<Entreprise> Entreprise { get; set; }
         public virtual DbSet<Piano> Piano { get; set; }
+        public virtual DbSet<PianoType> PianoType { get; set; }
         public virtual DbSet<Professeur> Professeur { get; set; }
         public virtual DbSet<Salle> Salle { get; set; }
         public virtual DbSet<Site> Site { get; set; }

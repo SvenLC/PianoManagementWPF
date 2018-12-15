@@ -7,24 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PianoManagementWPF
+namespace PianoManagementWPF.Databases
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Site
+    public partial class Salle
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Site()
+        public Salle()
         {
-            this.Salle = new HashSet<Salle>();
+            this.Piano = new HashSet<Piano>();
         }
     
+        public int SalleId { get; set; }
+        public string SalleLibelle { get; set; }
         public int SiteId { get; set; }
-        public string SiteLibelle { get; set; }
-        public string SiteAdresse { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Salle> Salle { get; set; }
+        public virtual ICollection<Piano> Piano { get; set; }
+        public virtual Site Site { get; set; }
     }
 }

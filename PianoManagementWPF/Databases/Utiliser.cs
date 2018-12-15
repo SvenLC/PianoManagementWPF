@@ -7,20 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PianoManagementWPF
+namespace PianoManagementWPF.Databases
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Accord
+    public partial class Utiliser
     {
-        public int AccordId { get; set; }
-        public System.DateTime AccordDate { get; set; }
-        public string AccordRemarque { get; set; }
         public int PianoId { get; set; }
-        public int AccordeurId { get; set; }
+        public int ProfesseurId { get; set; }
+        public string UtiliserRemarque { get; set; }
     
-        public virtual Accordeur Accordeur { get; set; }
         public virtual Piano Piano { get; set; }
+        public virtual Professeur Professeur { get; set; }
     }
 }

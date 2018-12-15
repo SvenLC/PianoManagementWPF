@@ -64,34 +64,53 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Accord.cs">
+    <Compile Include="Databases\Accord.cs">
       <DependentUpon>PianoManagementModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Accordeur.cs">
+    <Compile Include="Databases\Accordeur.cs">
       <DependentUpon>PianoManagementModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entreprise.cs">
+    <Compile Include="Databases\Entreprise.cs">
       <DependentUpon>PianoManagementModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Piano.cs">
+    <Compile Include="Databases\Piano.cs">
       <DependentUpon>PianoManagementModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="PianoManagementModel.cs">
+    <Compile Include="Databases\PianoManagementDatabase.cs" />
+    <Compile Include="Databases\PianoManagementModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PianoManagementModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Databases\PianoManagementModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PianoManagementModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Professeur.cs">
+    <Compile Include="Databases\PianoManagementModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PianoManagementModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Databases\PianoType.cs">
       <DependentUpon>PianoManagementModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Salle.cs">
+    <Compile Include="Databases\Professeur.cs">
       <DependentUpon>PianoManagementModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Site.cs">
+    <Compile Include="Databases\Salle.cs">
       <DependentUpon>PianoManagementModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Utiliser.cs">
+    <Compile Include="Databases\Site.cs">
       <DependentUpon>PianoManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Databases\Utiliser.cs">
+      <DependentUpon>PianoManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\ICrud.cs" />
+    <Compile Include="UserControls\BaseUserControl.cs" />
+    <Compile Include="UserControls\PianoUserControl.xaml.cs">
+      <DependentUpon>PianoUserControl.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -105,18 +124,12 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\PianoUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PianoManagementModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PianoManagementModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PianoManagementModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PianoManagementModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -134,14 +147,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
-    <EntityDeploy Include="PianoManagementModel.edmx">
+    <EntityDeploy Include="Databases\PianoManagementModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PianoManagementModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="PianoManagementModel.edmx.diagram">
+    <None Include="Databases\PianoManagementModel.edmx.diagram">
       <DependentUpon>PianoManagementModel.edmx</DependentUpon>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -151,19 +164,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PianoManagementModel.Context.tt">
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyLibrary\MyLibrary.csproj">
+      <Project>{d7a28322-0e3a-46f6-a07a-13d44e11cf97}</Project>
+      <Name>MyLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Databases\PianoManagementModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PianoManagementModel.Context.cs</LastGenOutput>
       <DependentUpon>PianoManagementModel.edmx</DependentUpon>
+      <LastGenOutput>PianoManagementModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="PianoManagementModel.tt">
+    <Content Include="Databases\PianoManagementModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PianoManagementModel.edmx</DependentUpon>
       <LastGenOutput>PianoManagementModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

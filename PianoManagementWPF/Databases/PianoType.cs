@@ -7,26 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PianoManagementWPF
+namespace PianoManagementWPF.Databases
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Accordeur
+    public partial class PianoType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Accordeur()
+        public PianoType()
         {
-            this.Accord = new HashSet<Accord>();
+            this.Piano = new HashSet<Piano>();
         }
     
-        public int AccordeurId { get; set; }
-        public string AccordeurNom { get; set; }
-        public string AccordeurPrenom { get; set; }
-        public int EntrepriseId { get; set; }
+        public int PianoTypeID { get; set; }
+        public string PianoTypeLibelle { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Accord> Accord { get; set; }
-        public virtual Entreprise Entreprise { get; set; }
+        public virtual ICollection<Piano> Piano { get; set; }
     }
 }
